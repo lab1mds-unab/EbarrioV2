@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+
+    <!--
+    Most controllers will use the ControllerClassNameHandlerMapping above, but
+    for the index controller we are using ParameterizableViewController, so we must
+    define an explicit mapping for it.
+    -->
+    <!--  
+    Acá se invocan las vistas por medio de <prop></prop>.
+    En el atributo de tipo key="" se ingresará el nombre de la vista JSP con el formato que fue asignado en el archivo web.xml,
+    en el área de <servlet-mapping>. Seguido de esto, se colocará el nombre del Controlador al cuál está asociado esta vista, por medio
+    del bean correcto donde será el atributo de tipo name="" el que ocupará ese nombre.
+    -->
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="desunirProyecto.htm">desunirProyectoController</prop>
+                <prop key="consumoHistorico.htm">consumoHistoricoController</prop>
+                <prop key="consumoProyecto.htm">consumoProyectoController</prop>
+                <prop key="ingresoConsumo.htm">ingresoConsumoController</prop>
+                <prop key="aporteProyecto.htm">aportarProyectoController</prop>
+                <prop key="eliminarUsuario.htm">eliminarUserController</prop>
+                <prop key="bloquearUser.htm">bloquearUserController</prop>
+                <prop key="editarUsuario.htm">editarUserController</prop>
+                <prop key="metaProyecto.htm">metaProyectoController</prop>
+                <prop key="eliminarProyecto.htm">eliminarProyectoController</prop>
+                <prop key="adjudicarProyecto.htm">aprobarProyectoController</prop>
+                <prop key="terminarProyecto.htm">aprobarProyectoController</prop>
+                <prop key="aprobarProyecto.htm">aprobarProyectoController</prop>
+                <prop key="editarProyecto.htm">editarProyectoController</prop>
+                <prop key="mantenedorProyectos.htm">inicioController</prop>
+                <prop key="contribuirProyecto.htm">contribuirController</prop>
+                <prop key="listaProyectos.htm">inicioController</prop>
+                <prop key="tutorial.htm">inicioController</prop>
+                <prop key="regisProye.htm">inicioController</prop>
+                <prop key="crearProyecto.htm">crearProyectoController</prop>
+                <prop key="proyectos.htm">inicioController</prop>
+                <prop key="mantenedorUser.htm">inicioController</prop>
+                <prop key="regisExito.htm">inicioController</prop>
+                <prop key="huellaCarbono.htm">inicioController</prop>
+                <prop key="inicioAdmin.htm">inicioController</prop>
+                <prop key="inicio.htm">inicioController</prop>
+                <prop key="index.htm">inicioController</prop>
+                <prop key="login.htm">inicioController</prop>
+                <prop key="registro.htm">registroController</prop> 
+                <prop key="loginAdmin.htm">inicioController</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/jsp/"
+          p:suffix=".jsp" />
+
+    <!--
+    Invocación de los Controladores, dónde en name="" se colocará el nombre y en class="" dónde están ubicados.
+    En name siempre será el comienzo con minúscula, ya que ese será el encargado de relacionarlo con la vista arriba en los props. En cambio,
+    en el class="" se llamará primero el package donde se encuentra el Controlador y luego, seguido de un punto "." se colocará el nombre del
+    Controlador con mayúscula, ya que es una Clase de Tipo .Java y por ende se respeta la anotación Camel.
+    -->
+    <bean name="desunirProyectoController" class="controller.DesunirProyectoController"/>
+    <bean name="consumoHistoricoController" class="controller.ConsumoHistoricoController"/>
+    <bean name="consumoProyectoController" class="controller.ConsumoProyectoController"/>
+    <bean name="ingresoConsumoController" class="controller.IngresoConsumoController"/>
+    <bean name="aportarProyectoController" class="controller.AportarProyectoController"/>
+    <bean name="eliminarUserController" class="controller.EliminarUserController"/>
+    <bean name="bloquearUserController" class="controller.BloquearUserController"/>
+    <bean name="editarUserController" class="controller.EditarUserController"/>
+    <bean name="metaProyectoController" class="controller.MetaProyectoController"/>
+    <bean name="eliminarProyectoController" class="controller.EliminarProyectoController"/>
+    <bean name="aprobarProyectoController" class="controller.AprobarProyectoController"/>
+    <bean name="editarProyectoController" class="controller.EditarProyectoController"/>
+    <bean name="contribuirController" class="controller.ContribuirController"/>
+    <bean name="crearProyectoController" class="controller.CrearProyectoController"/>
+    <bean name="inicioController" class="controller.InicioController"/>
+    <bean name="registroController" class="controller.RegistroController"/>
+</beans>
